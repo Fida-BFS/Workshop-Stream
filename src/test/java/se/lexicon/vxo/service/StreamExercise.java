@@ -39,6 +39,7 @@ public class StreamExercise {
         long amount = 0;
 
         // todo: write your code here
+        amount = people.stream().count();
 
         assertEquals(10000, amount);
     }
@@ -50,6 +51,7 @@ public class StreamExercise {
     public void task3() {
         long amount = 0;
         int expected = 90;
+
 
         // todo: write your code here
 
