@@ -55,7 +55,7 @@ public class StreamExercise {
 
         amount = people.stream()
                 .filter(people -> people.getLastName().equalsIgnoreCase("Andersson"))
-                        .count();
+                .count();
 
         assertEquals(expected, amount);
     }
@@ -67,8 +67,8 @@ public class StreamExercise {
     public void task4() {
         int expectedSize = 4988;
         List<Person> females = null;
-        //people 10000
-       females = people.stream().filter(p -> p.getGender() == Gender.FEMALE)
+
+        females = people.stream().filter(p -> p.getGender() == Gender.FEMALE)
                 .collect(Collectors.toList());
 
         assertNotNull(females);
@@ -82,6 +82,8 @@ public class StreamExercise {
     public void task5() {
         int expectedSize = 8882;
         Set<LocalDate> dates = null;
+
+        dates = people.stream().map(person -> person.getDateOfBirth()).collect(Collectors.toCollection(()-> new TreeSet<>()));
 
 
         // todo: write your code here
