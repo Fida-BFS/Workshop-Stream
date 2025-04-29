@@ -8,6 +8,7 @@ import se.lexicon.vxo.model.PersonDto;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
@@ -116,7 +117,9 @@ public class StreamExercise {
 
         Optional<Person> optional = null;
 
+
         // todo: write your code here
+        optional = people.stream().filter(person -> person.getPersonId() == 5436).findFirst();
 
 
         assertNotNull(optional);
@@ -133,7 +136,8 @@ public class StreamExercise {
 
         Optional<Person> optional = null;
 
-        // todo: write your code here
+        optional = people.stream()
+                .min(Comparator.comparing(Person::getDateOfBirth));
 
         assertNotNull(optional);
         assertEquals(expectedBirthDate, optional.get().getDateOfBirth());
