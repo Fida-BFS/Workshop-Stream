@@ -83,11 +83,7 @@ public class StreamExercise {
         int expectedSize = 8882;
         Set<LocalDate> dates = null;
 
-        dates = people.stream().map(person -> person.getDateOfBirth()).collect(Collectors.toCollection(()-> new TreeSet<>()));
-
-
-        // todo: write your code here
-
+        dates = people.stream().map(person -> person.getDateOfBirth()).collect(Collectors.toCollection(() -> new TreeSet<>()));
 
         assertNotNull(dates);
         assertTrue(dates instanceof TreeSet);
@@ -103,8 +99,9 @@ public class StreamExercise {
 
         Person[] result = null;
 
-        // todo: write your code here
-
+        result = people.stream()
+                .filter(person -> person.getFirstName().equalsIgnoreCase("erik"))
+                .toArray(Person[]::new);
 
         assertNotNull(result);
         assertEquals(expectedLength, result.length);
