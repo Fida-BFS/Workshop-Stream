@@ -7,6 +7,7 @@ import se.lexicon.vxo.model.PersonDto;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.ToIntFunction;
@@ -172,8 +173,11 @@ public class StreamExercise {
 
         Optional<String> optional = null;
 
-        // todo: write your code here
-
+        optional = people.stream().filter((p) -> p.getPersonId() == (personId))
+                .findAny()
+                .map(p -> p.getDateOfBirth().format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy"))
+                        .toUpperCase()
+                        .toString());
 
         assertNotNull(optional);
         assertTrue(optional.isPresent());
