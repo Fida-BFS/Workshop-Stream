@@ -152,7 +152,8 @@ public class StreamExercise {
 
         dtoList = people.stream()
                 .filter((p) -> p.getDateOfBirth()
-                        .isBefore(date)).map(person -> new PersonDto(person.getPersonId(), person.getFirstName() + person.getLastName()))
+                        .isBefore(date))
+                .map(person -> new PersonDto(person.getPersonId(), person.getFirstName() + person.getLastName()))
                 .collect(Collectors.toList());
 
         assertNotNull(dtoList);
