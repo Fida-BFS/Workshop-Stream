@@ -117,10 +117,7 @@ public class StreamExercise {
 
         Optional<Person> optional = null;
 
-
-        // todo: write your code here
         optional = people.stream().filter(person -> person.getPersonId() == 5436).findFirst();
-
 
         assertNotNull(optional);
         assertTrue(optional.isPresent());
@@ -153,8 +150,10 @@ public class StreamExercise {
 
         List<PersonDto> dtoList = null;
 
-        // todo: write your code here
-
+        dtoList = people.stream()
+                .filter((p) -> p.getDateOfBirth()
+                        .isBefore(date)).map(person -> new PersonDto(person.getPersonId(), person.getFirstName() + person.getLastName()))
+                .collect(Collectors.toList());
 
         assertNotNull(dtoList);
         assertEquals(expectedSize, dtoList.size());
