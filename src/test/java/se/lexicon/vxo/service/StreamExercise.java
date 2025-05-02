@@ -176,8 +176,7 @@ public class StreamExercise {
         optional = people.stream().filter((p) -> p.getPersonId() == (personId))
                 .findAny()
                 .map(p -> p.getDateOfBirth().format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy"))
-                        .toUpperCase()
-                        .toString());
+                        .toUpperCase());
 
         assertNotNull(optional);
         assertTrue(optional.isPresent());
@@ -194,6 +193,8 @@ public class StreamExercise {
                 person -> Period.between(person.getDateOfBirth(), LocalDate.parse("2019-12-20")).getYears();
         double expected = 54.42;
         double averageAge = 0;
+
+        averageAge = (double) people.stream().mapToInt(personToAge).sum() / (long) people.size();
 
         // todo: write your code here
 
