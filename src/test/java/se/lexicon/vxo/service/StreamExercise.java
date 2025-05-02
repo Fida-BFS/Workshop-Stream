@@ -163,7 +163,9 @@ public class StreamExercise {
 
         Optional<String> optional = null;
 
-        optional = people.stream().filter((p) -> p.getPersonId() == (personId)).findAny().map(p -> p.getDateOfBirth().format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy")).toUpperCase());
+        optional = people.stream().filter((p) -> p.getPersonId() == (personId)).findAny().map(p -> p.getDateOfBirth()
+                .format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy"))
+                .toUpperCase());
 
         assertNotNull(optional);
         assertTrue(optional.isPresent());
@@ -177,6 +179,7 @@ public class StreamExercise {
     @Test
     public void task11() {
         ToIntFunction<Person> personToAge = person -> Period.between(person.getDateOfBirth(), LocalDate.parse("2019-12-20")).getYears();
+
         double expected = 54.42;
         double averageAge = 0;
 
@@ -195,7 +198,7 @@ public class StreamExercise {
 
         String[] result = null;
 
-        result = people.stream().map(Person::getFirstName)
+        result = people.stream().map((p) -> p.getFirstName())
                 .filter(name -> new StringBuilder(name).reverse().toString().equalsIgnoreCase(name))
                 .distinct().sorted()
                 .toArray(String[]::new);
