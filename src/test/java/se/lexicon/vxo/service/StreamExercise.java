@@ -12,6 +12,7 @@ import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -228,7 +229,7 @@ public class StreamExercise {
     public void task14() {
         LocalDate[] _2020_dates = null;
 
-        // todo: write your code here
+        _2020_dates = Stream.iterate(LocalDate.of(2020, 1, 1), localDate -> localDate.plusDays(1)).limit(366).toArray(LocalDate[]::new);
 
         assertNotNull(_2020_dates);
         assertEquals(366, _2020_dates.length);
