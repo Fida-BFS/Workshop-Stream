@@ -55,9 +55,7 @@ public class StreamExercise {
         long amount = 0;
         int expected = 90;
 
-        amount = people.stream()
-                .filter(people -> people.getLastName().equalsIgnoreCase("Andersson"))
-                .count();
+        amount = people.stream().filter(people -> people.getLastName().equalsIgnoreCase("Andersson")).count();
 
         assertEquals(expected, amount);
     }
@@ -70,8 +68,7 @@ public class StreamExercise {
         int expectedSize = 4988;
         List<Person> females = null;
 
-        females = people.stream().filter(p -> p.getGender() == Gender.FEMALE)
-                .collect(Collectors.toList());
+        females = people.stream().filter(p -> p.getGender() == Gender.FEMALE).collect(Collectors.toList());
 
         assertNotNull(females);
         assertEquals(expectedSize, females.size());
@@ -101,9 +98,7 @@ public class StreamExercise {
 
         Person[] result = null;
 
-        result = people.stream()
-                .filter(person -> person.getFirstName().equalsIgnoreCase("erik"))
-                .toArray(Person[]::new);
+        result = people.stream().filter(person -> person.getFirstName().equalsIgnoreCase("erik")).toArray(Person[]::new);
 
         assertNotNull(result);
         assertEquals(expectedLength, result.length);
@@ -134,8 +129,7 @@ public class StreamExercise {
 
         Optional<Person> optional = null;
 
-        optional = people.stream()
-                .min(Comparator.comparing(Person::getDateOfBirth));
+        optional = people.stream().min(Comparator.comparing(Person::getDateOfBirth));
 
         assertNotNull(optional);
         assertEquals(expectedBirthDate, optional.get().getDateOfBirth());
@@ -151,11 +145,7 @@ public class StreamExercise {
 
         List<PersonDto> dtoList = null;
 
-        dtoList = people.stream()
-                .filter((p) -> p.getDateOfBirth()
-                        .isBefore(date))
-                .map(person -> new PersonDto(person.getPersonId(), person.getFirstName() + person.getLastName()))
-                .collect(Collectors.toList());
+        dtoList = people.stream().filter((p) -> p.getDateOfBirth().isBefore(date)).map(person -> new PersonDto(person.getPersonId(), person.getFirstName() + person.getLastName())).collect(Collectors.toList());
 
         assertNotNull(dtoList);
         assertEquals(expectedSize, dtoList.size());
@@ -173,10 +163,7 @@ public class StreamExercise {
 
         Optional<String> optional = null;
 
-        optional = people.stream().filter((p) -> p.getPersonId() == (personId))
-                .findAny()
-                .map(p -> p.getDateOfBirth().format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy"))
-                        .toUpperCase());
+        optional = people.stream().filter((p) -> p.getPersonId() == (personId)).findAny().map(p -> p.getDateOfBirth().format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy")).toUpperCase());
 
         assertNotNull(optional);
         assertTrue(optional.isPresent());
@@ -189,14 +176,11 @@ public class StreamExercise {
      */
     @Test
     public void task11() {
-        ToIntFunction<Person> personToAge =
-                person -> Period.between(person.getDateOfBirth(), LocalDate.parse("2019-12-20")).getYears();
+        ToIntFunction<Person> personToAge = person -> Period.between(person.getDateOfBirth(), LocalDate.parse("2019-12-20")).getYears();
         double expected = 54.42;
         double averageAge = 0;
 
         averageAge = (double) people.stream().mapToInt(personToAge).sum() / (long) people.size();
-
-        // todo: write your code here
 
         assertTrue(averageAge > 0);
         assertEquals(expected, averageAge, .01);
@@ -211,7 +195,10 @@ public class StreamExercise {
 
         String[] result = null;
 
-        // todo: write your code here
+        result = people.stream().map(Person::getFirstName)
+                .filter(name -> new StringBuilder(name).reverse().toString().equalsIgnoreCase(name))
+                .distinct().sorted()
+                .toArray(String[]::new);
 
         assertNotNull(result);
         assertArrayEquals(expected, result);
