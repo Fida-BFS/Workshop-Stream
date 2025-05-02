@@ -215,7 +215,7 @@ public class StreamExercise {
         int expectedSize = 107;
         Map<String, List<Person>> personMap = null;
 
-        // todo: write your code here
+        personMap = people.stream().collect(Collectors.groupingBy((p) -> p.getLastName()));
 
         assertNotNull(personMap);
         assertEquals(expectedSize, personMap.size());
